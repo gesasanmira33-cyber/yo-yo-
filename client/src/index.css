@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%; /* #050a14 */
+    --foreground: 210 40% 98%;
+    --primary: 191 100% 50%; /* #00d2ff */
+    --success: 120 100% 50%; /* #0f0 */
+    --danger: 346 100% 50%; /* #ff003c */
+  }
+
+  body {
+    @apply bg-[#050a14] text-foreground antialiased selection:bg-[#00d2ff]/30 selection:text-[#00d2ff];
+    font-family: 'Rajdhani', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .font-mono-custom {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Animations */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}
+
+/* Minimal custom scrollbar for sci-fi feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(5, 10, 20, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 210, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 210, 255, 0.6);
+}

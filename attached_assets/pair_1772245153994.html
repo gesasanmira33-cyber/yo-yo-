@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GESA PAIRING SYSTEM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- General Reset & Tech Fonts --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      /* Background Image */
+      background-image: url('https://github.com/gesandu1111/2026-2/blob/main/WhatsApp%20Image%202025-12-31%20at%2010.33.02.jpeg?raw=true');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Tech Overlay (Dark Blue/Black Filter) */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 10, 20, 0.75); /* Darker for neon contrast */
+      z-index: -1;
+    }
+
+    /* --- The Sci-Fi Container --- */
+    .container {
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 380px;
+      padding: 40px 20px;
+      text-align: center;
+      
+      /* Tech Glass Effect */
+      background: rgba(16, 20, 24, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      
+      /* Neon Border Animation */
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top moving light effect */
+    .box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00d2ff, transparent);
+      animation: scan 3s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { left: -100%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    /* --- Typography --- */
+    .icon-glow {
+      font-size: 60px;
+      margin-bottom: 20px;
+      color: #00d2ff;
+      text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+    }
+
+    h3 {
+      font-weight: 700;
+      font-size: 32px;
+      margin-bottom: 5px;
+      letter-spacing: 3px;
+      color: #fff;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    h6 {
+      font-weight: 500;
+      font-size: 14px;
+      color: #00d2ff; /* Cyan Text */
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* --- Tech Input Area --- */
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .input-container input {
+      width: 100%;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid #333;
+      border-left: 3px solid #00d2ff;
+      color: #fff;
+      font-size: 18px;
+      font-family: 'Courier New', monospace; /* Code look */
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .input-container input:focus {
+      border-color: #00d2ff;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+    }
+
+    .input-container button {
+      width: 100%;
+      padding: 15px;
+      background: transparent;
+      border: 1px solid #00d2ff;
+      color: #00d2ff;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .input-container button:hover {
+      background: #00d2ff;
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+    }
+
+    /* --- Loading Spinner (Tech Ring) --- */
+    #loading-spinner {
+      display: none;
+      margin: 20px 0;
+      color: #00d2ff;
+    }
+    
+    .spinner-tech {
+      width: 40px;
+      height: 40px;
+      border: 3px solid transparent;
+      border-top: 3px solid #00d2ff;
+      border-right: 3px solid #00d2ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* --- Result Area --- */
+    #pair {
+      margin-top: 20px;
+      min-height: 20px;
+    }
+
+    .code-display {
+      background: rgba(0, 20, 0, 0.8);
+      border: 1px dashed #0f0;
+      padding: 15px;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .code-display:hover::after {
+      content: 'CLICK TO COPY';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: #fff;
+    }
+
+    .error-msg {
+      color: #ff3333;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* --- Footer / Credits --- */
+    .credits {
+      margin-top: 40px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+    }
+    .credits span {
+      color: #00d2ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0, 210, 255, 0.5);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="box">
+      <i class="fas fa-fingerprint icon-glow"></i>
+      
+      <h3>GESA</h3>
+      <h6>System Pairing Interface</h6>
+
+      <div class="input-wrapper">
+        <div class="input-container">
+          <input type="number" id="number" placeholder="947xxxxxxxx" autocomplete="off">
+          <button id="submit">INITIATE PAIRING</button>
+        </div>
+      </div>
+
+      <div id="loading-spinner">
+        <div class="spinner-tech"></div>
+        <p style="font-size: 12px; margin-top: 10px; color:#00d2ff; letter-spacing:1px;">PROCESSING DATA...</p>
+      </div>
+
+      <main id="pair"></main>
+
+      <div class="credits">
+        SYSTEM SECURED BY <br> <span>M.R. GESA</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+
+  <script>
+    const pairDisplay = document.getElementById("pair");
+    const submitBtn = document.getElementById("submit");
+    const numberInput = document.getElementById("number");
+    const loadingSpinner = document.getElementById("loading-spinner");
+
+    // Copy Functionality
+    async function Copy() {
+      const copyElement = document.getElementById("copy");
+      const codeText = copyElement.innerText.replace('CODE: ', '');
+      
+      await navigator.clipboard.writeText(codeText);
+      
+      const originalHtml = copyElement.innerHTML;
+      copyElement.innerHTML = '<span style="color: #0f0; font-weight: bold;">[ DATA COPIED ]</span>';
+      copyElement.style.borderColor = "#0f0";
+      
+      setTimeout(() => {
+        copyElement.innerHTML = originalHtml;
+        copyElement.style.borderColor = "#0f0";
+      }, 1500);
+    }
+
+    // Submit Event
+    submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      
+      pairDisplay.innerHTML = '';
+      
+      const rawValue = numberInput.value;
+      const cleanNumber = rawValue.replace(/[^0-9]/g, "");
+
+      if (!rawValue) {
+        pairDisplay.innerHTML = '<span class="error-msg">⚠️ NULL INPUT DETECTED</span>';
+        return;
+      } 
+      if (cleanNumber.length < 11) {
+        pairDisplay.innerHTML = '<span class="error-msg">⚠️ INVALID FORMAT (ADD COUNTRY CODE)</span>';
+        return;
+      }
+
+      numberInput.value = "+" + cleanNumber;
+
+      // Show Tech Loading
+      loadingSpinner.style.display = "block";
+      submitBtn.disabled = true;
+      submitBtn.innerText = "CONNECTING...";
+      submitBtn.style.opacity = "0.5";
+
+      try {
+        // API Call
+        const { data } = await axios(`/code?number=${cleanNumber}`);
+        let code = data.code || "ERR_NO_DATA";
+        
+        // Display Result Tech Style
+        pairDisplay.innerHTML = `
+          <div id="copy" onclick="Copy()" class="code-display">
+            CODE: ${code}
+          </div>
+        `;
+        
+      } catch (error) {
+        pairDisplay.innerHTML = '<span class="error-msg">⚠️ SYSTEM ERROR: FAILED</span>';
+      } finally {
+        loadingSpinner.style.display = "none";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "INITIATE PAIRING";
+        submitBtn.style.opacity = "1";
+      }
+    });
+  </script>
+</body>
+</html>
